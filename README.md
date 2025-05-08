@@ -7,7 +7,7 @@ All included projects are Rust implementations for accessing and utilizing this 
 
 ### [blind-proxy-rs](https://github.com/judgegrubb/blind-insight-rs/tree/main/blind-proxy-rs)
 
-A Rust implementation of Blind Insight's Blind Proxy—A CLI tool for utilizing the Blind Insight datastore. 
+A Rust implementation of Blind Insight's [Blind Proxy](https://docs.blindinsight.io/getting-started/using-the-blind-proxy/)—A CLI tool for utilizing the Blind Insight datastore. 
 
 ### [blind-wrapper-rs](https://github.com/judgegrubb/blind-insight-rs/tree/main/blind-wrapper-rs)
 
