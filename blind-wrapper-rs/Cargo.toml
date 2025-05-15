@@ -1,6 +1,6 @@
 [package]
 name = "blind-wrapper-rs"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Elijah Grubb", "OpenAPI Generator team and contributors"]
 description = "Blind Insight OpenAPI Rust Wrapper"
 license = "Unlicense"
