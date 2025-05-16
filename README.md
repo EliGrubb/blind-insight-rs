@@ -1,5 +1,5 @@
 
-Rust-built tooling for accessing [Blind Insight](https://www.blindinsight.io/), a new end-to-end encrypted data store.
+CLI + API Toolkit built in Rust for accessing [Blind Insight](https://www.blindinsight.io/), a new end-to-end encrypted data store.
 
 ## Projects
 
@@ -10,7 +10,7 @@ A Rust implementation of Blind Insight's [Blind Proxy](https://docs.blindinsight
 ### [blind-wrapper-rs](https://github.com/judgegrubb/blind-insight-rs/tree/main/blind-wrapper-rs)
 
 A Rust wrapper of Blind Insight's [OpenAPI Specification](https://docs.blindinsight.io/api-reference/), 
-allowing Rust developers easy access to the full Blind Insight API suite.
+this API Toolkit allows Rust developers easy access to the full Blind Insight API suite.
 
 ## Future Project Ideas
 
