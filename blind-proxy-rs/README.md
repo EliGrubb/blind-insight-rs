@@ -3,7 +3,7 @@
 A Rust implementation of Blind Insight's [Blind Proxy](https://docs.blindinsight.io/getting-started/using-the-blind-proxy/).
 
 ## Implementation Status
-- [ ] --help
+- [X] --help
 - [ ] keyring
     - [ ] create keyring
     - [ ] inspect keyring
