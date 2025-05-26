@@ -4,6 +4,7 @@ use clap::{Args, Parser, Subcommand};
 #[derive(Parser, Debug)]
 #[command(name = "blind-proxy-rs")]
 #[command(bin_name = "blind-proxy-rs")]
+#[clap(author = "github.com/judgegrubb/blind-insight-rs")]
 pub struct BlindProxyCli {
     #[command(subcommand)]
     pub command: BlindProxyCommands,

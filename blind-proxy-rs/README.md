@@ -8,12 +8,9 @@ Contributions welcome!
 
 ## Implementation Status
 - [X] --help
-- [ ] keyring
-    - [ ] create
-        - [ ] create seed phrase from 256-bit entropy using bip39
-            - [ ] hand roll or use existing rust lib?
-        - [ ] store in system password manager
-    - [ ] inspect
+- [X] keyring
+    - [X] create
+    - [X] inspect
 - [ ] login
     - [ ] investigate rust pgp library options
         - rpgp vs sequoia

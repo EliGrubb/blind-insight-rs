@@ -8,3 +8,6 @@ bip39 = "2.1.0"
 blind-wrapper-rs = { path = "../blind-wrapper-rs" }
 clap = { version = "4.5.38", features = ["derive"] }
 clio = { version = "0.3.5", features = ["clap-parse"] }
+keyring = { version = "3.6.2", features = ["apple-native", "windows-native", "sync-secret-service"] }
+rand = "0.9.1"
+thiserror = "2.0.12"

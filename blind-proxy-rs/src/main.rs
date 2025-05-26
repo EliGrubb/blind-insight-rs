@@ -1,9 +1,11 @@
-use blind_wrapper_rs::{apis::{organizations_api::organizations_create, *}, models::*};
+//use blind_wrapper_rs::{apis::{organizations_api::organizations_create, *}, models::*};
 use clap::Parser;
 use cli::*;
 
 mod cli;
 mod bip39;
+mod keyring;
+mod error;
 
 /// Primary entry point and logic for the blind proxy CLI application.
 fn main() {
@@ -12,10 +14,10 @@ fn main() {
     match args.command {
         BlindProxyCommands::Keyring(keyring_args) => match keyring_args.command {
             KeyringCommands::Create => {
-                println!("You called keyring create! Wowza!");
+                keyring::create_keyring().unwrap();
             }
             KeyringCommands::Inspect => {
-                println!("You called keyring inspect! Holy cow!");
+                keyring::inspect_keyring().unwrap();
             }
         },
         BlindProxyCommands::Login => {
