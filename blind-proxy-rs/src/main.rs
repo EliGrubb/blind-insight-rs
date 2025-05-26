@@ -1,82 +1,9 @@
 use blind_wrapper_rs::{apis::{organizations_api::organizations_create, *}, models::*};
-use clap::{Args, Parser, Subcommand};
+use clap::Parser;
+use cli::*;
 
-#[derive(Parser, Debug)]
-#[command(name = "blind-proxy-rs")]
-#[command(bin_name = "blind-proxy-rs")]
-struct BlindProxyCli {
-    #[command(subcommand)]
-    command: BlindProxyCommands,
-}
-
-#[derive(Debug, Subcommand)]
-enum BlindProxyCommands {
-    /// Commands for managing the blind proxy
-    Keyring(KeyringArgs),
-    Login,
-    Organization(OrganizationArgs),
-    Dataset(DatasetArgs),
-    Schema(SchemaArgs),
-    Record(RecordArgs),
-}
-
-#[derive(Debug, Args)]
-struct KeyringArgs {
-    #[command(subcommand)]
-    command: KeyringCommands,
-}
-
-#[derive(Debug, Subcommand)]
-enum KeyringCommands {
-    Create,
-    Inspect,
-}
-
-#[derive(Debug, Args)]
-struct OrganizationArgs {
-    #[command(subcommand)]
-    command: OrganizationCommands,
-}
-
-#[derive(Debug, Subcommand)]
-enum OrganizationCommands {
-    Inspect,
-}
-
-#[derive(Debug, Args)]
-struct DatasetArgs {
-    #[command(subcommand)]
-    command: DatasetCommands,
-}
-
-#[derive(Debug, Subcommand)]
-enum DatasetCommands {
-    Inspect,
-}
-
-#[derive(Debug, Args)]
-struct SchemaArgs {
-    #[command(subcommand)]
-    command: SchemaCommands,
-}
-
-#[derive(Debug, Subcommand)]
-enum SchemaCommands {
-    Inspect,
-}
-
-#[derive(Debug, Args)]
-struct RecordArgs {
-    #[command(subcommand)]
-    command: RecordCommands,
-}
-
-#[derive(Debug, Subcommand)]
-enum RecordCommands {
-    Create,
-    Inspect,
-}
-
+mod cli;
+mod bip39;
 
 fn main() {
     let args = BlindProxyCli::parse();
