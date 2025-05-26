@@ -16,3 +16,15 @@ pub fn generate_seed_phrase() -> String {
         }
     }
 }
+
+pub fn create_keyring() -> Result<(), Error> {
+    let seed_phrase = generate_seed_phrase();
+    if seed_phrase.is_empty() {
+        return Err(Error::new(std::io::ErrorKind::Other, "Failed to generate seed phrase"));
+    }
+    
+    // Here you would typically save the seed phrase securely, e.g., in a file or database
+    println!("Generated seed phrase: {}", seed_phrase);
+    
+    Ok(())
+}
