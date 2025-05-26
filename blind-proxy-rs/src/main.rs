@@ -5,6 +5,7 @@ use cli::*;
 mod cli;
 mod bip39;
 
+/// Primary entry point and logic for the blind proxy CLI application.
 fn main() {
     let args = BlindProxyCli::parse();
 

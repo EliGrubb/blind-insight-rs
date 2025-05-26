@@ -1,3 +1,4 @@
+/// Data structures for handling CLI commands
 use clap::{Args, Parser, Subcommand};
 
 #[derive(Parser, Debug)]
