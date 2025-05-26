@@ -2,6 +2,10 @@
 
 A Rust implementation of Blind Insight's [Blind Proxy](https://docs.blindinsight.io/getting-started/using-the-blind-proxy/).
 
+>[!warning] Tread lightly, use at your own risk.
+This code is not even pre-beta, let alone ready for production use.
+Contributions welcome!
+
 ## Implementation Status
 - [X] --help
 - [ ] keyring

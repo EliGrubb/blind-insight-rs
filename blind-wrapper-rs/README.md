@@ -2,6 +2,10 @@
 
 An end-to-end encrypted datastore, now in Rust! Built using [Blind Insight's OpenAPI Spec](https://docs.blindinsight.io/api-reference/).
 
+>[!warning] Tread lightly, use at your own risk.
+This code is not even pre-beta, let alone ready for production use.
+Contributions welcome!
+
 ## Overview
 
 The initial code for this API client was generated using the [OpenAPI Generator](https://openapi-generator.tech) project.

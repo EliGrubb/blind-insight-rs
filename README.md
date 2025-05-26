@@ -1,6 +1,10 @@
 
 CLI + API Toolkit built in Rust for accessing [Blind Insight](https://www.blindinsight.io/), a new end-to-end encrypted data store.
 
+>[!warning] Tread lightly, use at your own risk.
+This code is not even pre-beta, let alone ready for production use.
+Contributions welcome!
+
 ## Projects
 
 ### [blind-proxy-rs](https://github.com/judgegrubb/blind-insight-rs/tree/main/blind-proxy-rs)
