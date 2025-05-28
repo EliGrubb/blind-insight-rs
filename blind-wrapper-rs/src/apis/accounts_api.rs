@@ -142,7 +142,7 @@ pub async fn accounts_change_password(configuration: &configuration::Configurati
         .headers()
         .get("content-type")
         .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
+        .unwrap_or("application/json");
     let content_type = super::ContentType::from(content_type);
 
     if !status.is_client_error() && !status.is_server_error() {
