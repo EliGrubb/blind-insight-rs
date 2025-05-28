@@ -1,6 +1,7 @@
-//use blind_wrapper_rs::{apis::{organizations_api::organizations_create, *}, models::*};
 use clap::Parser;
 use cli::*;
+use inquire::{Confirm, Password, PasswordDisplayMode, Text};
+use tokio::runtime::Runtime;
 
 mod cli;
 mod bip39;
@@ -10,18 +11,76 @@ mod error;
 /// Primary entry point and logic for the blind proxy CLI application.
 fn main() {
     let args = BlindProxyCli::parse();
+    let rt = Runtime::new().expect("Failed to create Tokio runtime");
 
     match args.command {
         BlindProxyCommands::Keyring(keyring_args) => match keyring_args.command {
             KeyringCommands::Create => {
-                keyring::create_keyring().unwrap();
+                let ans = Confirm::new("Would you like to generate a new seed phrase?")
+                    .with_default(true)
+                    .prompt();
+                match ans {
+                    Ok(true) => keyring::create_keyring().unwrap(),
+                    Ok(false) => {
+                        println!("Keyring creation cancelled.");
+                        return;
+                    },
+                    Err(_) => {
+                        eprintln!("Error: Failed to get user confirmation for keyring creation.");
+                        return;
+                    }
+                }
             }
             KeyringCommands::Inspect => {
-                keyring::inspect_keyring().unwrap();
+                let ans = Confirm::new("Are you sure you want to inspect the keyring?")
+                    .with_default(false)
+                    .with_help_message("This will reveal secrets in the keyring.")
+                    .prompt();
+                match ans {
+                    Ok(true) => keyring::inspect_keyring().unwrap(),
+                    Ok(false) => {
+                        println!("Keyring inspection cancelled.");
+                        return;
+                    },
+                    Err(_) => {
+                        eprintln!("Error: Failed to get user confirmation for keyring inspection.");
+                        return;
+                    }
+                }
             }
         },
         BlindProxyCommands::Login => {
-            println!("You called login! Let's get you in!");
+            //accounts_api::accounts_login(configuration, default_login);
+            let username = Text::new("Email")
+                .with_help_message("This doubles as your username.")
+                .prompt();
+            let password = Password::new("Password")
+                .with_display_toggle_enabled()
+                .with_display_mode(PasswordDisplayMode::Hidden)
+                .with_help_message("Enter your password.")
+                .prompt();
+
+            match (username, password) {
+                (Ok(user), Ok(pass)) => {
+                    rt.block_on(async {
+                        if let Err(e) = keyring::blind_login(&user, &pass).await {
+                            eprintln!("Login failed: {}", e);
+                            return;
+                        }
+                    });
+                }
+                (Err(e), _) => {
+                    eprintln!("Error reading username: {}", e);
+                    return;
+                }
+                (_, Err(e)) => {
+                    eprintln!("Error reading password: {}", e);
+                    return;
+                }                
+            }
+
+
+            println!("Credentials saved.");
         }
         BlindProxyCommands::Organization(org_args) => match org_args.command {
             OrganizationCommands::Inspect => {

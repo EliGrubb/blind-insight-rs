@@ -11,10 +11,13 @@ Contributions welcome!
 - [X] keyring
     - [X] create
     - [X] inspect
+    - [ ] move seed phrase to SecretString structure for memory safety
 - [ ] login
+    - [X] validate credentials with blind insight api
+    - [ ] store returned JWT for validation of other credentials
+- [ ] handling client-side encryption/decryption
     - [ ] investigate rust pgp library options
         - rpgp vs sequoia
-- [ ] handling client-side encryption/decryption
 - [ ] organizations
     - [ ] list organizations
 - [ ] dataset
@@ -25,3 +28,6 @@ Contributions welcome!
     - [ ] create records
     - [ ] list records
 
+## Future Work
+
+- integrate keyring with KMS and HSMs

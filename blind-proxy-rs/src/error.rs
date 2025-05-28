@@ -3,6 +3,8 @@ use rand::rand_core::OsError;
 use thiserror::Error;
 use bip39::Error as Bip39Error;
 use keyring::Error as KeyringError;
+use std::io::Error as StdError;
+
 
 #[derive(Debug, Error)]
 pub enum ProxyError {
@@ -14,4 +16,10 @@ pub enum ProxyError {
     Bip39Failure(#[from] Bip39Error),
     #[error("Keyring operation failed: {0}")]
     KeyringFailure(#[from] KeyringError),
+    #[error("Async operation failed: {0}")]
+    AsyncFailure(#[from] StdError),
+    #[error("{0:?}")]
+    LoginFailure(String),
+    #[error("Unknown error occurred: {0}")]
+    Unknown(String),
 }
