@@ -44,6 +44,8 @@ pub mod login_successful;
 pub use self::login_successful::LoginSuccessful;
 pub mod login_successful_error;
 pub use self::login_successful_error::LoginSuccessfulError;
+pub mod status_403;
+pub use self::status_403::Status403;
 pub mod logout;
 pub use self::logout::Logout;
 pub mod logout_successful;

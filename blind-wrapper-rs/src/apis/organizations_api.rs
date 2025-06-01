@@ -103,6 +103,7 @@ pub enum OrganizationsInvitationsUpdateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum OrganizationsListError {
+    Status403(models::Status403),
     UnknownValue(serde_json::Value),
 }
 
