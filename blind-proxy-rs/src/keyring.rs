@@ -10,11 +10,10 @@ use std::sync::Arc;
 use reqwest::{cookie::{CookieStore, Jar}, Url};
 
 const KEYRING_SERVICE: &str = "blind-proxy-rs";
-const KEYRING_USERNAME: &str = "proxy-user";
-const LOGIN_TARGET: &str = "blind-insight-login";
-const PASSWORD_TARGET: &str = "blind-insight-password";
-const SEED_TARGET: &str = "seed";
-const COOKIES_TARGET: &str = "blind-insight-cookies";
+const LOGIN_USER: &str = "blind-insight-login";
+const PASSWORD_USER: &str = "blind-insight-password";
+const SEED_USER: &str = "blind-proxy-seed";
+const COOKIES_USER: &str = "blind-insight-cookies";
 
 /// generate a new keyring
 pub fn generate_seed_phrase() -> Result<String, ProxyError> {
@@ -29,45 +28,45 @@ pub fn generate_seed_phrase() -> Result<String, ProxyError> {
 
 pub fn create_keyring() -> Result<(), ProxyError> {
     let seed_phrase = generate_seed_phrase()?;
-    let entry = Entry::new_with_target(SEED_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, SEED_USER)?;
     entry.set_password(&seed_phrase)?;
     
     Ok(())
 }
 
 pub fn store_blind_login_credentials(username: &str, password: &str) -> Result<(), ProxyError> {
-    let entry = Entry::new_with_target(LOGIN_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, LOGIN_USER)?;
     entry.set_password(&username)?;
-    let entry = Entry::new_with_target(PASSWORD_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, PASSWORD_USER)?;
     entry.set_password(&password)?;
     
     Ok(())
 }
 
 pub fn get_blind_login_credentials() -> Result<(String, String), ProxyError> {
-    let entry = Entry::new_with_target(LOGIN_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, LOGIN_USER)?;
     let username = entry.get_password()?;
     
-    let entry = Entry::new_with_target(PASSWORD_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, PASSWORD_USER)?;
     let password = entry.get_password()?;
     
     Ok((username, password))
 }
 
 pub fn store_cookies(cookies: &str) -> Result<(), ProxyError> {
-    let entry = Entry::new_with_target(COOKIES_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, COOKIES_USER)?;
     entry.set_password(cookies)?;
     
     Ok(())
 }
 
 pub fn get_cookies() -> Result<String, ProxyError> {
-    let entry = Entry::new_with_target(COOKIES_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let entry = Entry::new(KEYRING_SERVICE, COOKIES_USER)?;
     Ok(entry.get_password()?)
 }
 
 pub fn inspect_keyring() -> Result<(), ProxyError> {
-    let seed_entry = Entry::new_with_target(SEED_TARGET, KEYRING_SERVICE, KEYRING_USERNAME)?;
+    let seed_entry = Entry::new(KEYRING_SERVICE, SEED_USER)?;
     match seed_entry.get_password() {
         Ok(seed) => println!("Your seed phrase: {}", seed),
         Err(_) => println!("No seed phrase set. Call keyring create to create one."),
@@ -85,7 +84,7 @@ pub fn inspect_keyring() -> Result<(), ProxyError> {
     Ok(())
 }
 
-fn get_blind_insight_configuration() -> Configuration {
+pub fn get_blind_insight_configuration() -> Configuration {
     match get_cookies() {
         Ok(cookies) => {
             let jar = Arc::new(Jar::default());

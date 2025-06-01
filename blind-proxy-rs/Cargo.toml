@@ -12,5 +12,6 @@ inquire = "0.7.5"
 keyring = { version = "3.6.2", features = ["apple-native", "windows-native", "sync-secret-service"] }
 rand = "0.9.1"
 reqwest = { version = "0.12.16", features = ["cookies"] }
+serde_json = "1.0.140"
 thiserror = "2.0.12"
 tokio = { version = "1.45.1", features = ["rt-multi-thread"] }

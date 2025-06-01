@@ -7,6 +7,7 @@ mod cli;
 mod bip39;
 mod keyring;
 mod error;
+mod organizations;
 
 /// Primary entry point and logic for the blind proxy CLI application.
 fn main() {
@@ -56,7 +57,7 @@ fn main() {
                 .prompt();
             let password = Password::new("Password")
                 .with_display_toggle_enabled()
-                .with_display_mode(PasswordDisplayMode::Hidden)
+                .with_display_mode(PasswordDisplayMode::Masked)
                 .with_help_message("Enter your password.")
                 .prompt();
 
@@ -82,8 +83,24 @@ fn main() {
             println!("Credentials saved.");
         }
         BlindProxyCommands::Organization(org_args) => match org_args.command {
-            OrganizationCommands::Inspect => {
-                println!("You called organization inspect! Let's see the details!");
+            OrganizationCommands::List => {
+                rt.block_on(async {
+                    match organizations::list_all_organizations().await  {
+                        Ok(orgs) => {
+                            if orgs.is_empty() {
+                                println!("No organizations found.");
+                            } else {
+                                for org in orgs {
+                                    println!("{}", org);
+                                }
+                            }
+                        }
+                        Err(e) => {
+                            eprintln!("List organizations failed: {}", e);
+                            return;
+                        }
+                    }
+                });
             }
         },
         BlindProxyCommands::Dataset(dataset_args) => match dataset_args.command {

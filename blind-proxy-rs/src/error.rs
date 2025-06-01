@@ -22,4 +22,6 @@ pub enum ProxyError {
     LoginFailure(String),
     #[error("Unknown error occurred: {0}")]
     Unknown(String),
+    #[error("Failed to parse JSON: {0}")]
+    JsonParseError(#[from] serde_json::Error),
 }

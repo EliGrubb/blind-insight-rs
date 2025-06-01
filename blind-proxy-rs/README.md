@@ -12,14 +12,15 @@ Contributions welcome!
     - [X] create
     - [X] inspect
     - [ ] move seed phrase to SecretString structure for memory safety
-- [ ] login
+- [X] login
     - [X] validate credentials with blind insight api
-    - [ ] store returned JWT for validation of other credentials
+    - [X] store returned sessionID for validation across sessions
 - [ ] handling client-side encryption/decryption
     - [ ] investigate rust pgp library options
         - rpgp vs sequoia
-- [ ] organizations
-    - [ ] list organizations
+- [ ] organization
+    - [X] list organization
+    - [ ] pretty print organization data
 - [ ] dataset
     - [ ] create dataset
 - [ ] schema

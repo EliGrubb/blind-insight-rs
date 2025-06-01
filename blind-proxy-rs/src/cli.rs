@@ -41,7 +41,7 @@ pub struct OrganizationArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum OrganizationCommands {
-    Inspect,
+    List,
 }
 
 #[derive(Debug, Args)]
