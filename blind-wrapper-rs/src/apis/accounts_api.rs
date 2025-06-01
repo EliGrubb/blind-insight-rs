@@ -9,10 +9,12 @@
  */
 
 
-use reqwest;
+use reqwest::{self, cookie};
 use serde::{Deserialize, Serialize, de::Error as _};
 use crate::{apis::ResponseContent, models};
 use super::{Error, configuration, ContentType};
+use reqwest::cookie::Jar;
+use std::sync::Arc;
 
 
 /// struct for typed errors of method [`accounts_change_password`]

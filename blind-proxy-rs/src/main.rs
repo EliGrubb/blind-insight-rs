@@ -79,7 +79,6 @@ fn main() {
                 }                
             }
 
-
             println!("Credentials saved.");
         }
         BlindProxyCommands::Organization(org_args) => match org_args.command {
