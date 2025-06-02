@@ -10,7 +10,7 @@ pub async fn list_all_organizations() -> Result<Vec<String>, ProxyError> {
     match organizations_list(&configuration, None, None, None, None, None, None, None, None, None).await {
         Ok(orgs) => {
             for org in orgs {
-                organizations_vec.push(serde_json::to_string(&org)?);
+                organizations_vec.push(serde_json::to_string_pretty(&org)?);
             }
         },
         Err(e) => {
