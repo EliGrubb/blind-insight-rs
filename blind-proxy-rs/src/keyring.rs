@@ -119,7 +119,6 @@ pub async fn blind_login(username: &str, password: &str) -> Result<(), ProxyErro
             }
             
             store_blind_login_credentials(username, password)?;
-            println!("Login successful: {:?}", response);
             Ok(())
         },
         Err(e) => {

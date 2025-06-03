@@ -18,9 +18,9 @@ Contributions welcome!
 - [ ] handling client-side encryption/decryption
     - [ ] investigate rust pgp library options
         - rpgp vs sequoia
-- [ ] organization
+- [X] organization
     - [X] list organization
-    - [ ] pretty print organization data
+    - [X] pretty print organization data
 - [ ] dataset
     - [ ] create dataset
 - [ ] schema
